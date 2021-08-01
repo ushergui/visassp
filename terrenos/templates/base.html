@@ -10,12 +10,55 @@
 
     <meta charset="UTF-8">
     <title>
-        Titulo
+        {% block title %}
+        {% endblock %}
     </title>
 
 </head>
 <body>
-FUNCIONOU
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'homepage' %}">Vigilância Sanitária</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+          <li><a href="{% url 'listar_fiscal' %}">Fiscais</a></li>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+{% block content %}
+
+{% endblock %}
+</div>
+
+
+
+<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'jquery.mask.min.js' %}"></script>
+
+
+    <script>
+        $(document).ready(function(){
+            $('.mask-cep').mask('00000-000');
+        });
+
+        $(document).ready(function(){
+            $('.mask-matricula').mask('00000');
+        });
+
+         $(document).ready(function(){
+            $('.mask-protocolo').mask('SSS-00000/00');
+        });
+    </script>
+
 
 </body>
 </html>
