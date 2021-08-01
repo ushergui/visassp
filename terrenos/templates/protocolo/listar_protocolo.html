@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Listagem de Protocolos
+{% endblock title %}
+
+{% block content %}
+<form method="get">
+    <div class="col-lg-12">
+    <div class="input-group">
+      <input type="text" class="form-control" name="busca" placeholder="Buscar protocolo">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Pesquisar</button>
+      </span>
+    </div>
+    </div>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Protocolo</th>
+      <th>Solicitante</th>
+      <th>Logradouro</th>
+      <th>Descrição</th>
+      <th>Bairro</th>
+      <th>Status</th>
+      <th>Entrada</th>
+      <th>Encerramento</th>
+      <th>Fiscal</th>
+      <th>Editar</th>
+      <th>Excluir</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for protocolo in lista %}
+    <!-- Criei um "for" para rodar com os dados que veio do sistema e apresentar em cada linha um novo registro -->
+    <tr>
+        <td>{{ protocolo.protocolo }}</td>
+        <td>{{ protocolo.solicitante_protocolo }}</td>
+        <td>{{ protocolo.logradouro_protocolo }}</td>
+        <td>{{ protocolo.descricao_protocolo }}</td>
+        <td>{{ protocolo.bairro_protocolo }}</td>
+        <td>{{ protocolo.status_protocolo }}</td>
+        <td>{{ protocolo.entrada_protocolo|date:"d/m/Y" }}</td>
+        <td>{{ protocolo.encerramento_protocolo|date:"d/m/Y" }}</td>
+        <td>{{ protocolo.fiscal }}</td>
+        <td>
+        <a href="{% url 'editar_protocolo' pk=protocolo.pk %}">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+        </td>
+        <td>
+        <a href="{% url 'excluir_protocolo' pk=protocolo.pk %}">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
+        </td>
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+<a href="{% url 'cadastrar_protocolo' %}">
+<button type="submit" class="btn btn-primary">
+    Cadastrar
+</button>
+</a>
+{% endblock content %}

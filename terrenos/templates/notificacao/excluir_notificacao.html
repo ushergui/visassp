@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Remoção de Notificações
+{% endblock title %}
+
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <h4>Tem certeza que deseja excluir a notificação de nº{{ notificacao.id }}/{{ notificacao.data_notificacao|date:"y" }}"?</h4>
+    <br/>
+<button type="submit" class="btn btn-primary">
+    Remover
+</button>
+</form>
+
+{% endblock content %}

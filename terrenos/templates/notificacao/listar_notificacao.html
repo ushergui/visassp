@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Listagem de Notificações
+{% endblock title %}
+
+{% block content %}
+<form method="get">
+    <div class="col-lg-12">
+    <div class="input-group">
+      <input type="text" class="form-control" name="busca" placeholder="Buscar notificação">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Pesquisar</button>
+      </span>
+    </div>
+    </div>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Número</th>
+      <th>Ano</th>
+      <th>Protocolo</th>
+      <th>Terreno</th>
+      <th>Data</th>
+      <th>Fiscal</th>
+      <th>Visualizar</th>
+      <th>Editar</th>
+      <th>Excluir</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for notificacao in lista %}
+    <!-- Criei um "for" para rodar com os dados que veio do sistema e apresentar em cada linha um novo registro -->
+    <tr>
+        <td>{{ notificacao.id }}</td>
+        <td>{{ notificacao.data_notificacao|date:"Y" }}</td>
+        <td>{{ notificacao.protocolo }}</td>
+        <td>{{ notificacao.terreno.inscricao_terreno }}</td>
+        <td>{{ notificacao.data_notificacao|date:"d/m/Y" }}</td>
+        <td>{{ notificacao.fiscal }}</td>
+
+         <td class="text-center">
+        <a href="{% url 'gerar_notificacao' pk=notificacao.pk %}">
+          <span class="glyphicon glyphicon-file"></span>
+        </a>
+        </td>
+
+        <td class="text-center">
+        <a href="{% url 'editar_notificacao' pk=notificacao.pk %}">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+        </td>
+        <td class="text-center">
+        <a href="{% url 'excluir_notificacao' pk=notificacao.pk %}">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
+        </td>
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+<a href="{% url 'cadastrar_notificacao' %}">
+<button type="submit" class="btn btn-primary">
+    Cadastrar
+</button>
+</a>
+{% endblock content %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Listagem de Proprietários
+{% endblock title %}
+
+{% block content %}
+<form method="get">
+    <div class="col-lg-12">
+    <div class="input-group">
+      <input type="text" class="form-control" name="busca" placeholder="Buscar proprietário">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Pesquisar</button>
+      </span>
+    </div>
+    </div>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Logradouro</th>
+      <th>Número</th>
+      <th>Complemento</th>
+      <th>Bairro</th>
+      <th>Cep</th>
+      <th>Município</th>
+      <th>Estado</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for proprietario in lista %}
+    <!-- Criei um "for" para rodar com os dados que veio do sistema e apresentar em cada linha um novo registro -->
+    <tr>
+        <td>{{ proprietario.nome_proprietario }}</td>
+        <td>{{ proprietario.logradouro_proprietario }}</td>
+        <td>{{ proprietario.numero_proprietario }}</td>
+        <td>{{ proprietario.complemento_proprietario }}</td>
+        <td>{{ proprietario.bairro_proprietario }}</td>
+        <td>{{ proprietario.cep_proprietario }}</td>
+        <td>{{ proprietario.municipio_proprietario }}</td>
+        <td>{{ proprietario.estado_proprietario }}</td>
+        <td>
+        <a href="{% url 'editar_proprietario' pk=proprietario.pk %}">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+        </td>
+        <td>
+        <a href="{% url 'excluir_proprietario' pk=proprietario.pk %}">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
+        </td>
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+<a href="{% url 'cadastrar_proprietario' %}">
+<button type="submit" class="btn btn-primary">
+    Cadastrar
+</button>
+</a>
+{% endblock content %}

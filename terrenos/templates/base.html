@@ -26,9 +26,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-
+          <li><a href="{% url 'listar_terreno' %}">Terrenos</a></li>
+          <li><a href="{% url 'listar_proprietario' %}">Proprietários</a></li>
+          <li><a href="{% url 'listar_notificacao' %}">Notificações</a></li>
           <li><a href="{% url 'listar_fiscal' %}">Fiscais</a></li>
-
+          <li><a href="{% url 'listar_protocolo' %}">Protocolos</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

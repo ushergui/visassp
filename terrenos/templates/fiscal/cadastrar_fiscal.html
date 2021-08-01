@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
+{% load bootstrap %}
 {% block title %}
 Cadastro de Fiscal
 {% endblock title %}
@@ -8,7 +8,7 @@ Cadastro de Fiscal
 
 <form method="post">
         {% csrf_token %}
-    {{ form|bootstrap }}
+        {{ form|bootstrap }}
     <button type="submit" class="btn btn-primary">
         Salvar
     </button>

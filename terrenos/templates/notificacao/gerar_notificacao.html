@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" >
+<head>
+<title>Notificação</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">
+<style>@page { size: A4 }</style>
+<style type="text/css">
+ .ft06{font-size:20px;font-family:BAAAAA+Arial;color:#000000;}
+
+</style>
+<!--<style type="text/css">
+
+	p {margin: 0; padding: 0;}	.ft00{font-size:18px;font-family:BAAAAA+Arial;color:#000000;}
+	.ft01{font-size:15px;font-family:BAAAAA+Arial;color:#000000;}
+	.ft02{font-size:15px;font-family:CAAAAA+ArialMT;color:#000000;body {
+  background-color: #FFFFFF;
+}}
+
+</style>-->
+</head>
+<body class="A4">
+<section class="sheet padding-10mm">
+<img src="{% static 'a.png' %}" style="float:left;width:70px"/>
+
+
+<div id="page1-div" style="position:relative;width:793px;height:1122px;">
+
+<p style="position:absolute;top:-30px;left:128px;white-space:nowrap" class="ft00"><b>PREFEITURA MUNICIPAL DE SÃO SEBASTIÃO DO PARAÍSO</b></p>
+<p style="position:absolute;top:-11px;left:260px;white-space:nowrap" class="ft00"><b>Secretaria Municipal de Saúde</b></p>
+<p style="position:absolute;top:12px;left:233px;white-space:nowrap" class="ft00"><b>Departamento de Vigilância em Saúde</b></p>
+<p style="position:absolute;top:32px;left:260px;white-space:nowrap" class="ft00"><b>Divisão de Vigilância Sanitária</b></p>
+<p style="position:absolute;top:61px;left:272px;white-space:nowrap" class="ft06"><b>NOTIFICAÇÃO Nº {{ notificacao.id }}/{{ notificacao.data_notificacao|date:"Y" }}</b></p>
+<p style="position:absolute;top:106px;left:10px;white-space:nowrap" class="ft01"><b>Endereço do imóvel: </b></p>
+<p style="position:absolute;top:106px;left:156px;white-space:nowrap" class="ft02">{{ notificacao.terreno.logradouro_terreno }}, {{ notificacao.terreno.numero_terreno }} - {{ notificacao.terreno.bairro_terreno }}</p>
+<p style="position:absolute;top:132px;left:10px;white-space:nowrap" class="ft01"><b>Inscrição cadastral: </b></p>
+<p style="position:absolute;top:132px;left:149px;white-space:nowrap" class="ft02">{{notificacao.terreno.inscricao_terreno}}</p>
+<p style="position:absolute;top:132px;left:305px;white-space:nowrap" class="ft01"><b>Quadra:</b></p>
+<p style="position:absolute;top:132px;left:369px;white-space:nowrap" class="ft02"> {{ notificacao.terreno.quadra_terreno }} </p>
+<p style="position:absolute;top:132px;left:435px;white-space:nowrap" class="ft01"><b>Lote:</b></p>
+<p style="position:absolute;top:132px;left:477px;white-space:nowrap" class="ft02"> {{ notificacao.terreno.lote_terreno }}       </p>
+<p style="position:absolute;top:132px;left:544px;white-space:nowrap" class="ft01"><b>Área:</b></p>
+<p style="position:absolute;top:132px;left:590px;white-space:nowrap" class="ft02"> {{ notificacao.terreno.area_terreno }} m²</p>
+<p style="position:absolute;top:158px;left:10px;white-space:nowrap" class="ft01"><b>Proprietário:</b></p>
+<p style="position:absolute;top:158px;left:104px;white-space:nowrap" class="ft02"> {{ notificacao.terreno.proprietario.nome_proprietario }} </p>
+
+<p style="position:absolute;top:199px;left:10px;white-space:nowrap" class="ft02">Pelo presente termo, fica o proprietário acima,&#160;
+ <b><u>NOTIFICADO</u></b> a proceder à limpeza/capina/roçada/drenagem</p>
+<p style="position:absolute;top:225px;left:10px;white-space:nowrap" class="ft02"> do terreno localizado no endereço mencionado e mantê-lo limpo, a fim de atender ao disposto no art. 1º da Lei</p>
+<p style="position:absolute;top:251px;left:10px;white-space:nowrap" class="ft02">Municipal nº&#160; 3838/2011: &#160;Os &#160;proprietários &#160;ou&#160; possuidores&#160; a &#160;qualquer título de terrenos baldios ou não, &#160;são   </p>
+<p style="position:absolute;top:277px;left:10px;white-space:nowrap" class="ft02">obrigados a mantê-los limpos, capinados ou roçados e drenados, &#160;sob pena de aplicação de sanções administra-
+<p style="position:absolute;top:303px;left:10px;white-space:nowrap" class="ft02">tivas previstas nesta Lei.”&#160;,  no prazo &#160;máximo de 15 (quinze) dias iniciando-se a contagem do prazo na data de </p>
+<p style="position:absolute;top:329px;left:10px;white-space:nowrap" class="ft02">recebimento desta Notificação, conforme §1º do art. 2º da Lei Municipal nº 3838/2011. </p>
+
+<p style="position:absolute;top:364px;left:10px;white-space:nowrap" class="ft02">Tal &#160;Notificação &#160;se &#160;faz &#160;necessária, &#160;considerando &#160;que   foi   constatado   em   &#160;inspeção   &#160;no   &#160;dia&#160; {{ notificacao.data_inspecao|date:"d/m/Y" }} que o  </p>
+<p style="position:absolute;top:390px;left:10px;white-space:nowrap" class="ft02">terreno &#160;encontra-se &#160;sujo, &#160;propício &#160;para &#160;a &#160;proliferação &#160;de &#160;animais peçonhentos além de fonte de criação de    </p>
+<p style="position:absolute;top:416px;left:10px;white-space:nowrap" class="ft02">  vetores,&#160; pragas &#160;e &#160;animais  &#160;sinantrópicos  &#160;que &#160;possam&#160; causar &#160;danos &#160; ou&#160;  trazer  &#160; risco  &#160;e agravos &#160;a   saúde   da   </b> </p>
+<p style="position:absolute;top:442px;left:10px;white-space:nowrap" class="ft01"> população &#160;<b>caracterizando &#160;infração &#160;sanitária, &#160;conforme &#160;inciso &#160;XLI &#160;do art. 119 da Lei Complementar </b></p>
+ <p style="position:absolute;top:468px;left:10px;white-space:nowrap" class="ft01">Municipal nº 37/2012.</b></p>
+
+<p style="position:absolute;top:503px;left:10px;white-space:nowrap" class="ft02">De acordo com &#160;o &#160;art. 3º da&#160; &#160;Lei &#160;Municipal &#160;nº 3838/2011, &#160;o não&#160; cumprimento &#160;desta &#160;Notificação no prazo </p>
+<p style="position:absolute;top:529px;left:10px;white-space:nowrap" class="ft01"><b>  estabelecido levará&#160; à: I) lavratura &#160;do &#160;Auto &#160;de&#160; Infração com imposição de multa na proporção de 1% </b></p>
+<p style="position:absolute;top:555px;left:10px;white-space:nowrap" class="ft01"><b>(um por cento) do Valor de Referência do Município (VRM) por metro quadrado de terreno utilizando-</b> </p>
+<p style="position:absolute;top:581px;left:10px;white-space:nowrap" class="ft02"><b>se com base o cadastro imobiliário da Prefeitura. </b>II)&#160; limpeza do &#160; terreno   &#160;através  do&#160; órgão&#160;competente da   </p>
+<p style="position:absolute;top:607px;left:10px;white-space:nowrap" class="ft02"> Prefeitura&#160;ou&#160; mediante&#160; concessão,&#160; por  meios  de serviços de&#160; capinação,&#160; roçada&#160; ou&#160; limpeza de entulhos &#160;do</p>
+<p style="position:absolute;top:633px;left:10px;white-space:nowrap" class="ft02"> terreno &#160;respectivo,&#160;ficando &#160;o &#160;seu &#160;proprietário ou&#160; possuidor, &#160;a qualquer &#160;título, &#160;obrigado&#160;ao pagamento das </p>
+<p style="position:absolute;top:659px;left:10px;white-space:nowrap" class="ft02">despesas &#160;efetuadas sem &#160;prejuízo das penalidades pecuniárias &#160;cabíveis; &#160;III) &#160;aplicação de outras &#160;penalidades</p>
+<p style="position:absolute;top:685px;left:10px;white-space:nowrap" class="ft02">previstas &#160;na &#160;Lei  Complementar Municipal nº 37/2012.</p>
+<p style="position:absolute;top:720px;left:10px;white-space:nowrap" class="ft01"><b>A &#160;fim &#160;de &#160;ser&#160; considerado &#160;limpo, &#160;o &#160;terreno&#160; e&#160; o imóvel &#160;devem &#160;estar sem vegetação ou roçado com o  </b></p>
+<p style="position:absolute;top:746px;left:10px;white-space:nowrap" class="ft01"><b> mínimo &#160;de &#160;vegetação &#160;possível, sem &#160;os resíduos &#160;da limpeza/roçada, e sem depósito de outros resíduos, &#160; </b></p>
+<p style="position:absolute;top:772px;left:10px;white-space:nowrap" class="ft01"><b> como pneus, lixos, móveis, carcaças de veículos, e outros.</b></p>
+<p style="position:absolute;top:807px;left:10px;white-space:nowrap" class="ft02">É proibida a prática de queimada na realização de limpeza de terrenos, considerando o disposto nos incisos </p>
+<p style="position:absolute;top:833px;left:10px;white-space:nowrap" class="ft02">XVI e XIX do art. 16 da Lei Municipal nº 3059/2003.</p>
+<p style="position:absolute;top:868px;left:10px;white-space:nowrap" class="ft02">Aplicação&#160;de&#160;herbicida&#160;(capina&#160;química)&#160;não&#160;será&#160;considerada&#160;limpeza&#160;de&#160;terreno.</p>
+<p style="position:absolute;top:903px;left:10px;white-space:nowrap" class="ft02">São&#160;Sebastião&#160;do&#160;Paraíso,&#160;23&#160;de&#160;Julho&#160;de&#160;2021.</p>
+
+<p style="position:absolute;top:949px;left:250px;white-space:nowrap" class="ft02"><b>Guilherme Firmino Duarte</b></p>
+<p style="position:absolute;top:976px;left:281px;white-space:nowrap" class="ft02"><b>Fiscal Sanitário I</b></p>
+
+<p style="position:absolute;top:1022px;left:8px;white-space:nowrap" class="ft02">Divisão&#160;de&#160;Vigilância&#160;Sanitária&#160;–&#160;Rua&#160;Dr.&#160;Placidino&#160;Brigagão,&#160;1230&#160;–&#160;Centro&#160;–&#160;São&#160;Sebastião&#160;do&#160;Paraíso&#160;–&#160;MG</p>
+<p style="position:absolute;top:1040px;left:140px;white-space:nowrap" class="ft02">Telefone&#160;(35)3539-5003&#160;–&#160;e-mail&#160;vigilancia.saude@ssparaiso.mg.gov.br</p>
+ </section>
+</div>
+</body>
+</html>
