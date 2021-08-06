@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'terrenos',
     'crispy_forms',
     'bootstrapform',
-    'mathfilters'
+
 ]
 
 MIDDLEWARE = [
