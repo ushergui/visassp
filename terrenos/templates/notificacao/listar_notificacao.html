@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load mathfilters %}
 {% block title %}
 Listagem de Notificações
 {% endblock title %}
@@ -25,7 +25,14 @@ Listagem de Notificações
       <th>Terreno</th>
       <th>Data</th>
       <th>Fiscal</th>
-      <th>Visualizar</th>
+      <th>Rastreio</th>
+      <th>Recebimento</th>
+      <th>Voltar após</th>
+      <th>Retorno</th>
+      <th>Limpou?</th>
+      <th>Notificação</th>
+      <th>AR Cor.</th>
+      <th>AR Prop.</th>
       <th>Editar</th>
       <th>Excluir</th>
     </tr>
@@ -40,10 +47,27 @@ Listagem de Notificações
         <td>{{ notificacao.terreno.inscricao_terreno }}</td>
         <td>{{ notificacao.data_notificacao|date:"d/m/Y" }}</td>
         <td>{{ notificacao.fiscal }}</td>
+        <td>{{ notificacao.rastreio_notificacao }}</td>
+        <td>{{ notificacao.data_entrega_notificacao|date:"d/m/Y" }}</td>
+        <td>{{ notificacao.data_entrega_notificacao|date:"d/m/Y" }}</td>
+        <td>{{ notificacao.data_entrega_notificacao|date:"d/m/Y" }}</td>
+        <td>{{ notificacao.cumpriu_notificacao }}</td>
 
-         <td class="text-center">
+
+        <td class="text-center">
         <a href="{% url 'gerar_notificacao' pk=notificacao.pk %}">
           <span class="glyphicon glyphicon-file"></span>
+        </a>
+        </td>
+        <td class="text-center">
+        <a href="{% url 'gerar_ar' pk=notificacao.pk %}">
+          <span class="glyphicon glyphicon-envelope"></span>
+        </a>
+        </td>
+
+        <td class="text-center">
+        <a href="{% url 'gerar_ar2' pk=notificacao.pk %}">
+          <span class="glyphicon glyphicon-envelope"></span>
         </a>
         </td>
 

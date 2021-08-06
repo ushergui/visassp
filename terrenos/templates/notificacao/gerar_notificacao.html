@@ -26,6 +26,8 @@
 <img src="{% static 'a.png' %}" style="float:left;width:70px"/>
 
 
+
+
 <div id="page1-div" style="position:relative;width:793px;height:1122px;">
 
 <p style="position:absolute;top:-30px;left:128px;white-space:nowrap" class="ft00"><b>PREFEITURA MUNICIPAL DE SÃO SEBASTIÃO DO PARAÍSO</b></p>
@@ -74,7 +76,7 @@
 <p style="position:absolute;top:807px;left:10px;white-space:nowrap" class="ft02">É proibida a prática de queimada na realização de limpeza de terrenos, considerando o disposto nos incisos </p>
 <p style="position:absolute;top:833px;left:10px;white-space:nowrap" class="ft02">XVI e XIX do art. 16 da Lei Municipal nº 3059/2003.</p>
 <p style="position:absolute;top:868px;left:10px;white-space:nowrap" class="ft02">Aplicação&#160;de&#160;herbicida&#160;(capina&#160;química)&#160;não&#160;será&#160;considerada&#160;limpeza&#160;de&#160;terreno.</p>
-<p style="position:absolute;top:903px;left:10px;white-space:nowrap" class="ft02">São&#160;Sebastião&#160;do&#160;Paraíso,&#160;23&#160;de&#160;Julho&#160;de&#160;2021.</p>
+<p style="position:absolute;top:903px;left:10px;white-space:nowrap" class="ft02">São&#160;Sebastião&#160;do&#160;Paraíso,&#160;{{ notificacao.data_notificacao|date:"d" }}&#160;de&#160;{{ notificacao.data_notificacao|date:"F" }}&#160;de&#160;{{ notificacao.data_notificacao|date:"Y" }}</p>
 
 <p style="position:absolute;top:949px;left:250px;white-space:nowrap" class="ft02"><b>Guilherme Firmino Duarte</b></p>
 <p style="position:absolute;top:976px;left:281px;white-space:nowrap" class="ft02"><b>Fiscal Sanitário I</b></p>

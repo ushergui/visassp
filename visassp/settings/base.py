@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'terrenos',
     'crispy_forms',
     'bootstrapform',
+    'mathfilters'
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DATE_INPUT_FORMATS = [
+    '%d/%m/%Y', '%d/%m/%y',  # '25/10/2006', '25/10/06'
+    '%d de %b de %Y'#, '%d de %b, %Y',   # '25 de Out de 2006', '25 Out, 2006'
+    '%d de %B de %Y'#, '%d de %B, %Y',   # '25 de Outubro de 2006', '25 de Outubro, 2006'
+]

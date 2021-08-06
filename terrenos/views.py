@@ -1,6 +1,8 @@
 from django.forms import ModelForm
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
+from datetime import date, timedelta
+
 
 class formulario_proprietario(ModelForm):
     class Meta:
@@ -135,9 +137,9 @@ class formulario_protocolo(ModelForm):
         fields = ['protocolo', 'solicitante_protocolo', 'logradouro_protocolo','bairro_protocolo',
                   'descricao_protocolo','status_protocolo','entrada_protocolo','encerramento_protocolo','fiscal']
 
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self.fields['protocolo'].widget.attrs.update({'class': 'mask-protocolo'})
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['protocolo'].widget.attrs.update({'class': 'mask-protocolo'})
 
 # Cria a função de cadastrar um estado
 def cadastrar_protocolo(request, template_name='protocolo/formulario_protocolo.html'):
@@ -193,8 +195,16 @@ class formulario_notificacao(ModelForm):
     class Meta:
         model = Notificacao
         fields = ['protocolo', 'terreno','data_notificacao',
-                  'data_inspecao','horario_inspecao','fiscal']
-
+                  'data_inspecao','horario_inspecao','fiscal', 'rastreio_notificacao','data_entrega_notificacao','data_retorno','horario_retorno','observacoes','cumpriu_notificacao']
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['rastreio_notificacao'].widget.attrs.update({'class': 'mask-rastreio'})
+        self.fields['data_entrega_notificacao'].widget.attrs.update({'class': 'mask-date'})
+        self.fields['data_retorno'].widget.attrs.update({'class': 'mask-date'})
+        self.fields['horario_retorno'].widget.attrs.update({'class': 'mask-time'})
+        self.fields['data_inspecao'].widget.attrs.update({'class': 'mask-date'})
+        self.fields['data_notificacao'].widget.attrs.update({'class': 'mask-date'})
+        self.fields['horario_inspecao'].widget.attrs.update({'class': 'mask-time'})
 
 # Cria a função de cadastrar um estado
 def cadastrar_notificacao(request, template_name='notificacao/formulario_notificacao.html'):
@@ -220,7 +230,16 @@ def listar_notificacao(request, template_name="notificacao/listar_notificacao.ht
     notificacoes = {'lista': notificacao}
     return render(request, template_name, notificacoes)
 
+
 def gerar_notificacao(request,pk,template_name="notificacao/gerar_notificacao.html"):
+    notificacao = get_object_or_404(Notificacao, pk=pk)
+    return render(request, template_name, {'notificacao':notificacao})
+
+def gerar_ar(request,pk,template_name="notificacao/gerar_ar.html"):
+    notificacao = get_object_or_404(Notificacao, pk=pk)
+    return render(request, template_name, {'notificacao':notificacao})
+
+def gerar_ar2(request,pk,template_name="notificacao/gerar_ar2.html"):
     notificacao = get_object_or_404(Notificacao, pk=pk)
     return render(request, template_name, {'notificacao':notificacao})
 
