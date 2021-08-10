@@ -23,4 +23,5 @@ import visassp.visassp.settings.base
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'', include('terrenos.urls')),
-]+static(visassp.visassp.settings.base.MEDIA_URL, document_root=visassp.visassp.settings.base.MEDIA_ROOT)
+]
+
