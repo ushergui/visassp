@@ -227,8 +227,10 @@ def listar_notificacao(request, template_name="notificacao/listar_notificacao.ht
         notificacao = Notificacao.objects.filter(id__icontains=query)
     else:
         notificacao = Notificacao.objects.all()
+
     notificacoes = {'lista': notificacao}
     return render(request, template_name, notificacoes)
+
 
 
 def gerar_notificacao(request,pk,template_name="notificacao/gerar_notificacao.html"):

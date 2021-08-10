@@ -7,6 +7,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
     <meta charset="UTF-8">
     <title>
         {% block title %}
@@ -34,11 +37,14 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class="container">
+<div class="container-fluid">
+
+
 {% block content %}
 
 {% endblock %}
 </div>
+
 
 
 
@@ -66,6 +72,7 @@
         $('.mask-date').mask("00/00/0000", {placeholder: "__/__/____"});
 
         $('.mask-time').mask("00:00", {placeholder: "__:__"});
+
 
     </script>
 

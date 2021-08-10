@@ -1,4 +1,5 @@
-from datetime import timedelta
+import datetime
+from datetime import *
 
 from django.db import models
 
@@ -1230,13 +1231,25 @@ class Notificacao(models.Model):
     data_retorno = models.DateField(null=True, blank=True)
     horario_retorno = models.TimeField(null=True, blank=True)
     observacoes = models.CharField(max_length=200, null=True, blank=True)
-    cumpriu_notificacao = models.BooleanField(null=True, blank=True)
+    CUMPRIU_CHOICES = (
+        ("PENDENTE", "PENDENTE"),
+        ("SIM", "SIM"),
+        ("NÃO", "NÃO"),
+    )
+    cumpriu_notificacao = models.CharField(max_length=15, null=False, choices=CUMPRIU_CHOICES)
+    @property
+    def data_mais_quinze(self):
+        if self.data_entrega_notificacao is not None:
+            return self.data_entrega_notificacao + timedelta(days=15)
 
-    def soma(self):
-       return self.data_entrega_notificacao + timedelta(days = 15)
 
-    def __str__(self):
-        return self.id
+
+
+
+
+
+
+
 
 # para chamar dois atributos:
 #     def __str__(self):

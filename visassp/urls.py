@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
+from django.conf.urls.static import static
+
+import visassp.visassp.settings.base
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'', include('terrenos.urls')),
-]
+]+static(visassp.visassp.settings.base.MEDIA_URL, document_root=visassp.visassp.settings.base.MEDIA_ROOT)
