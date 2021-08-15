@@ -6,6 +6,7 @@ from .views import *
 urlpatterns = [
 
     url(r"^$", homepage, name='homepage'),
+    url(r"^test", test, name='test'),
     url(r'^cadastrar_fiscal', cadastrar_fiscal, name='cadastrar_fiscal'),
     url(r'^listar_fiscal', listar_fiscal, name='listar_fiscal'),
     url(r'^excluir_fiscal/(?P<pk>[0-9]+)', excluir_fiscal, name='excluir_fiscal'),
@@ -16,6 +17,13 @@ urlpatterns = [
     url(r'^gerar_notificacao/(?P<pk>[0-9]+)', gerar_notificacao, name='gerar_notificacao'),
     url(r'^gerar_ar/(?P<pk>[0-9]+)', gerar_ar, name='gerar_ar'),
     url(r'^gerar_ar2/(?P<pk>[0-9]+)', gerar_ar2, name='gerar_ar2'),
+    url(r'^cadastrar_infracao', cadastrar_infracao, name='cadastrar_infracao'),
+    url(r'^listar_infracao', listar_infracao, name='listar_infracao'),
+    url(r'^excluir_infracao/(?P<pk>[0-9]+)', excluir_infracao, name='excluir_infracao'),
+    url(r'^gerar_infracao/(?P<pk>[0-9]+)', gerar_infracao, name='gerar_infracao'),
+    url(r'^gerar_ar_inf/(?P<pk>[0-9]+)', gerar_ar_inf, name='gerar_ar_inf'),
+    url(r'^gerar_ar2_inf/(?P<pk>[0-9]+)', gerar_ar2_inf, name='gerar_ar2_inf'),
+    url(r'^editar_infracao/(?P<pk>[0-9]+)', editar_infracao, name='editar_infracao'),
     url(r'^editar_notificacao/(?P<pk>[0-9]+)', editar_notificacao, name='editar_notificacao'),
     url(r'^cadastrar_proprietario', cadastrar_proprietario, name='cadastrar_proprietario'),
     url(r'^listar_proprietario', listar_proprietario, name='listar_proprietario'),

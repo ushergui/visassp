@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" >
+<body>
+
+<table>
+     <thead>
+
+    <tr>
+      <th class="text-center">Área</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for notificacao in lista %}
+     <tr>
+      <td>{{ notificacao.areaTerreno }}</td>
+     </tr>
+
+    </tbody>
+
+
+
+</table>
+{% endfor %}
+
+</body>

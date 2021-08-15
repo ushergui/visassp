@@ -1,9 +1,11 @@
 import datetime
 from datetime import *
 
+import numero_por_extenso
 from django.db import models
 
 # Create your models here.
+from numero_por_extenso import real, monetario
 
 
 class Fiscal(models.Model):
@@ -1161,7 +1163,7 @@ class Terreno(models.Model):
     #def __str__(self):
         #return self.inscricao_terreno
     def __str__(self):
-        return "{} - {}".format(self.inscricao_terreno, self.proprietario)
+        return "{} - {}, {}".format(self.inscricao_terreno, self.proprietario, self.area_terreno)
 
     # para chamar dois atributos:
     #     def __str__(self):
@@ -1241,7 +1243,47 @@ class Notificacao(models.Model):
     def data_mais_quinze(self):
         if self.data_entrega_notificacao is not None:
             return self.data_entrega_notificacao + timedelta(days=15)
+    def __str__(self):
+        return "{}. {}, {}, {}, {}, {}, {}, {}".format(self.protocolo, self.terreno, self.id,
+                                            self.data_notificacao, self.data_inspecao,self.fiscal, self.data_entrega_notificacao, self.data_retorno, self.horario_retorno)
+    def save(self, *args, **kwargs):
+        self.rastreio_notificacao = self.rastreio_notificacao.upper()
+        self.observacoes= self.observacoes.upper()
+        super(Notificacao, self).save(*args, **kwargs)
 
+    def areaTerreno(self):
+        return real(self.terreno.area_terreno)
+    def vrm(self):
+        vrm = self.terreno.area_terreno * 1.9982
+        return monetario((round(vrm, 2)))
+    def vrm2(self):
+        vrm2 = self.terreno.area_terreno * 1.9982
+        return (round(vrm2, 2))
+
+
+class Infracao(models.Model):
+    notificacao = models.OneToOneField(Notificacao, on_delete=models.CASCADE)
+    data_auto = models.DateField(null=False, verbose_name="Data da autuação")
+    data_inspecao_2 = models.DateField(null=False, verbose_name="Data da nova inspeção")
+    horario_inspecao_2 = models.TimeField(null=False, verbose_name="Horário da infração")
+    rastreio_infracao = models.CharField(max_length=13, null=True, blank=True, verbose_name="Código de rastreio")
+    data_entrega_autuacao = models.DateField(null=True, blank=True, verbose_name="Data da entrega do Auto de infração")
+    DEFENDEU_CHOICES = (
+        ("PENDENTE", "PENDENTE"),
+        ("SIM", "SIM"),
+        ("NÃO", "NÃO"),
+    )
+    defendeu = models.CharField(max_length=15, null=False, choices=DEFENDEU_CHOICES, verbose_name="Apresentou defesa?")
+
+    def __str__(self):
+        return "{}. {}, {}, {}, {}, {}, {}, {}".format( self.notificacao, self.data_auto,
+                                            self.data_inspecao_2, self.horario_inspecao_2,self.data_entrega_autuacao, self.data_entrega_autuacao, self.data_inspecao_2, self.horario_inspecao_2)
+
+
+
+    def save(self, *args, **kwargs):
+        self.rastreio_infracao = self.rastreio_infracao.upper()
+        super(Infracao, self).save(*args, **kwargs)
 
 
 

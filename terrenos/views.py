@@ -270,6 +270,83 @@ def editar_notificacao(request, pk, template_name='notificacao/formulario_notifi
     return render(request, template_name, {'form': form})
 
 
+class formulario_infracao(ModelForm):
+    class Meta:
+        model = Infracao
+        fields = ['notificacao', 'data_auto','data_inspecao_2',
+                  'horario_inspecao_2','rastreio_infracao','data_entrega_autuacao', 'defendeu']
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['rastreio_infracao'].widget.attrs.update({'class': 'mask-rastreio'})
+        self.fields['data_auto'].widget.attrs.update({'class': 'mask-date'})
+        self.fields['data_inspecao_2'].widget.attrs.update({'class': 'mask-date'})
+        self.fields['data_entrega_autuacao'].widget.attrs.update({'class': 'mask-date'})
+        self.fields['horario_inspecao_2'].widget.attrs.update({'class': 'mask-time'})
+
+
+# Cria a função de cadastrar um estado
+def cadastrar_infracao(request, template_name='infracao/formulario_infracao.html'):
+    form = formulario_infracao(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('listar_infracao')
+    return render(request, template_name, {'form': form})
+
+
+# Cria a função de listar os estados
+#def listar_notificacao(request, template_name='notificacao/listar_notificacao.html'):
+ #   notificacao = Notificacao.objects.all()
+  #  notificacoes = {'lista': notificacao}
+   # return render(request, template_name, notificacoes)
+
+def listar_infracao(request, template_name="infracao/listar_infracao.html"):
+    query = request.GET.get("busca")
+    if query:
+        infracao = Infracao.objects.filter(id__icontains=query)
+    else:
+        infracao = Infracao.objects.all()
+
+    infracoes = {'lista': infracao}
+    return render(request, template_name, infracoes)
+
+
+
+def gerar_infracao(request,pk,template_name="infracao/gerar_infracao.html"):
+    infracao = get_object_or_404(Infracao, pk=pk)
+    return render(request, template_name, {'infracao':infracao})
+
+def gerar_ar_inf(request,pk,template_name="infracao/gerar_ar_inf.html"):
+    infracao = get_object_or_404(Infracao, pk=pk)
+    return render(request, template_name, {'infracao':infracao})
+
+def gerar_ar2_inf(request,pk,template_name="infracao/gerar_ar2_inf.html"):
+    infracao = get_object_or_404(Infracao, pk=pk)
+    return render(request, template_name, {'infracao':infracao})
+
+
+
+# Cria a função de deletar um estado
+def excluir_infracao(request, pk):
+    infracao = Infracao.objects.get(pk=pk)
+    if request.method == "POST":
+        infracao.delete()
+        return redirect('listar_infracao')
+    return render(request, 'infracao/excluir_infracao.html', {'infracao': infracao})
+
+
+
+# Cria a função de editar um estado
+def editar_infracao(request, pk, template_name='infracao/formulario_infracao.html'):
+    infracao = get_object_or_404(Infracao, pk=pk)
+    if request.method == "POST":
+        form = formulario_infracao(request.POST, instance=infracao)
+        if form.is_valid():
+            infracao = form.save()
+            return redirect('listar_infracao')
+    else:
+        form = formulario_infracao(instance=infracao)
+    return render(request, template_name, {'form': form})
+
 class formulario_fiscal(ModelForm):
     class Meta:
         model = Fiscal
@@ -330,6 +407,11 @@ def editar_fiscal(request, pk, template_name='fiscal/formulario_fiscal.html'):
 
 def homepage(request, template_name="base.html"):
     return render(request, template_name)
+
+def test(request, template_name="test.html"):
+    return render(request, template_name)
+
+
 
 
 

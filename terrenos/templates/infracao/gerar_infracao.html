@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" >
+<head>
+<title>Auto de Infração</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">
+<style>@page { size: A4 }</style>
+<style type="text/css">
+ .ft06{font-size:20px;font-family:BAAAAA+Arial;color:#000000;}
+
+</style>
+<!--<style type="text/css">
+
+	p {margin: 0; padding: 0;}	.ft00{font-size:18px;font-family:BAAAAA+Arial;color:#000000;}
+	.ft01{font-size:15px;font-family:BAAAAA+Arial;color:#000000;}
+	.ft02{font-size:15px;font-family:CAAAAA+ArialMT;color:#000000;body {
+  background-color: #FFFFFF;
+}}
+
+</style>-->
+</head>
+<body class="A4">
+<section class="sheet padding-10mm">
+<img src="{% static 'a.png' %}" style="float:left;width:70px"/>
+
+
+
+
+<div id="page1-div" style="position:relative;width:793px;height:1122px;">
+
+<p style="position:absolute;top:-30px;left:128px;white-space:nowrap" class="ft00"><b>PREFEITURA MUNICIPAL DE SÃO SEBASTIÃO DO PARAÍSO</b></p>
+<p style="position:absolute;top:-11px;left:260px;white-space:nowrap" class="ft00"><b>Secretaria Municipal de Saúde</b></p>
+<p style="position:absolute;top:12px;left:233px;white-space:nowrap" class="ft00"><b>Departamento de Vigilância em Saúde</b></p>
+<p style="position:absolute;top:32px;left:260px;white-space:nowrap" class="ft00"><b>Divisão de Vigilância Sanitária</b></p>
+<p style="position:absolute;top:61px;left:272px;white-space:nowrap" class="ft06"><b>AUTO DE INFRAÇÃO Nº {{ infracao.id }}</b></p>
+<p style="position:absolute;top:106px;left:10px;white-space:nowrap" class="ft01"><b>Endereço do imóvel: </b></p>
+<p style="position:absolute;top:106px;left:156px;white-space:nowrap" class="ft02">{{ infracao.notificacao.terreno.logradouro_terreno }}, {{ infracao.notificacao.terreno.numero_terreno }} - {{ infracao.notificacao.terreno.bairro_terreno }}</p>
+<p style="position:absolute;top:132px;left:10px;white-space:nowrap" class="ft01"><b>Inscrição cadastral: </b></p>
+<p style="position:absolute;top:132px;left:149px;white-space:nowrap" class="ft02">{{infracao.notificacao.terreno.inscricao_terreno}}</p>
+<p style="position:absolute;top:132px;left:305px;white-space:nowrap" class="ft01"><b>Quadra:</b></p>
+<p style="position:absolute;top:132px;left:369px;white-space:nowrap" class="ft02"> {{ infracao.notificacao.terreno.quadra_terreno }} </p>
+<p style="position:absolute;top:132px;left:435px;white-space:nowrap" class="ft01"><b>Lote:</b></p>
+<p style="position:absolute;top:132px;left:477px;white-space:nowrap" class="ft02"> {{ infracao.notificacao.terreno.lote_terreno }}       </p>
+<p style="position:absolute;top:132px;left:544px;white-space:nowrap" class="ft01"><b>Área:</b></p>
+<p style="position:absolute;top:132px;left:590px;white-space:nowrap" class="ft02"> {{ infracao.notificacao.terreno.area_terreno }} m²</p>
+<p style="position:absolute;top:158px;left:10px;white-space:nowrap" class="ft01"><b>Proprietário:</b></p>
+<p style="position:absolute;top:158px;left:104px;white-space:nowrap" class="ft02"> {{ infracao.notificacao.terreno.proprietario.nome_proprietario }} </p>
+
+<p style="position:absolute;top:199px;left:10px;white-space:nowrap" class="ft02">Pelo presente termo, fica o proprietário acima,&#160;
+ <b><u>AUTUADO</u></b> pelo fato de não ter procedido à limpeza/capina</p>
+<p style="position:absolute;top:225px;left:10px;white-space:nowrap" class="ft02">roçada do terreno localizado no endereço mencionado a fim de atender ao disposto no art. 1º da Lei</p>
+<p style="position:absolute;top:251px;left:10px;white-space:nowrap" class="ft02">Municipal nº&#160; 3838/2011, &#160;no prazo estabelecido pela Notificação nº&#160;{{ infracao.notificacao.id }}, recebida em {{ infracao.notificacao.data_entrega_notificacao|date:"d/m/Y" }}. A infração</p>
+<p style="position:absolute;top:277px;left:10px;white-space:nowrap" class="ft02">foi constatada em {{ infracao.data_inspecao_2|date:"d/m/Y" }} às {{ infracao.horario_inspecao_2}}h.
+
+ <p style="position:absolute;top:364px;left:10px;white-space:nowrap" class="ft02">Assim, conforme inciso I do art. 3º da Lei Municipal nº 3838/2011, fica imposta penalidade de <b><u>MULTA</u></b> </p>
+<p style="position:absolute;top:390px;left:10px;white-space:nowrap" class="ft02"> na  proporção de 1% (um por cento) do Valor de Referência do Município (VRM) por metro quadrado  </p>
+<p style="position:absolute;top:416px;left:10px;white-space:nowrap" class="ft02"> de terreno, utilizando-se como base o cadastro imobiliário da Prefeitura Municipal, totalizando: </p>
+<p style="position:absolute;top:442px;left:10px;white-space:nowrap" class="ft01"> - {{ infracao.notificacao.terreno.area_terreno}}% ({{ infracao.notificacao.areaTerreno }} por cento) do VRM,  </b></p>
+ <p style="position:absolute;top:468px;left:10px;white-space:nowrap" class="ft01">- R${{ infracao.notificacao.vrm2 }} ({{ infracao.notificacao.vrm }}).</p>
+
+<p style="position:absolute;top:503px;left:10px;white-space:nowrap" class="ft02">Fica ainda o infrator, INTIMADO a apresentar defesa, caso queira, no prazo de 10 (dez) dias contados a </p>
+<p style="position:absolute;top:529px;left:10px;white-space:nowrap" class="ft01"> partir do recebimento deste Auto de Infração, conforme parágrafo 5º do art. 3º da Lei Municipal  estabelecido levará&#160; à: I) lavratura &#160;do &#160;Auto &#160;de&#160; Infração com imposição de multa na proporção de 1% </b></p>
+<p style="position:absolute;top:555px;left:10px;white-space:nowrap" class="ft01"><b>(um por cento) do Valor de Referência do Município (VRM) por metro quadrado de terreno utilizando-</b> </p>
+<p style="position:absolute;top:581px;left:10px;white-space:nowrap" class="ft02"><b>se com base o cadastro imobiliário da Prefeitura. </b>II)&#160; limpeza do &#160; terreno   &#160;através  do&#160; órgão&#160;competente da   </p>
+<p style="position:absolute;top:607px;left:10px;white-space:nowrap" class="ft02"> Prefeitura&#160;ou&#160; mediante&#160; concessão,&#160; por  meios  de serviços de&#160; capinação,&#160; roçada&#160; ou&#160; limpeza de entulhos &#160;do</p>
+<p style="position:absolute;top:633px;left:10px;white-space:nowrap" class="ft02"> terreno &#160;respectivo,&#160;ficando &#160;o &#160;seu &#160;proprietário ou&#160; possuidor, &#160;a qualquer &#160;título, &#160;obrigado&#160;ao pagamento das </p>
+<p style="position:absolute;top:659px;left:10px;white-space:nowrap" class="ft02">despesas &#160;efetuadas sem &#160;prejuízo das penalidades pecuniárias &#160;cabíveis; &#160;III) &#160;aplicação de outras &#160;penalidades</p>
+<p style="position:absolute;top:685px;left:10px;white-space:nowrap" class="ft02">previstas &#160;na &#160;Lei  Complementar Municipal nº 37/2012.</p>
+<p style="position:absolute;top:720px;left:10px;white-space:nowrap" class="ft01"><b>A &#160;fim &#160;de &#160;ser&#160; considerado &#160;limpo, &#160;o &#160;terreno&#160; e&#160; o imóvel &#160;devem &#160;estar sem vegetação ou roçado com o  </b></p>
+<p style="position:absolute;top:746px;left:10px;white-space:nowrap" class="ft01"><b> mínimo &#160;de &#160;vegetação &#160;possível, sem &#160;os resíduos &#160;da limpeza/roçada, e sem depósito de outros resíduos, &#160; </b></p>
+<p style="position:absolute;top:772px;left:10px;white-space:nowrap" class="ft01"><b> como pneus, lixos, móveis, carcaças de veículos, e outros.</b></p>
+<p style="position:absolute;top:807px;left:10px;white-space:nowrap" class="ft02">É proibida a prática de queimada na realização de limpeza de terrenos, considerando o disposto nos incisos </p>
+<p style="position:absolute;top:833px;left:10px;white-space:nowrap" class="ft02">XVI e XIX do art. 16 da Lei Municipal nº 3059/2003.</p>
+<p style="position:absolute;top:868px;left:10px;white-space:nowrap" class="ft02">Aplicação&#160;de&#160;herbicida&#160;(capina&#160;química)&#160;não&#160;será&#160;considerada&#160;limpeza&#160;de&#160;terreno.</p>
+<p style="position:absolute;top:903px;left:10px;white-space:nowrap" class="ft02">São&#160;Sebastião&#160;do&#160;Paraíso,&#160;{{ notificacao.data_notificacao|date:"d" }}&#160;de&#160;{{ notificacao.data_notificacao|date:"F" }}&#160;de&#160;{{ notificacao.data_notificacao|date:"Y" }}</p>
+
+<p style="position:absolute;top:949px;left:250px;white-space:nowrap" class="ft02"><b>Guilherme Firmino Duarte</b></p>
+<p style="position:absolute;top:976px;left:281px;white-space:nowrap" class="ft02"><b>Fiscal Sanitário I</b></p>
+
+<p style="position:absolute;top:1022px;left:8px;white-space:nowrap" class="ft02">Divisão&#160;de&#160;Vigilância&#160;Sanitária&#160;–&#160;Rua&#160;Dr.&#160;Placidino&#160;Brigagão,&#160;1230&#160;–&#160;Centro&#160;–&#160;São&#160;Sebastião&#160;do&#160;Paraíso&#160;–&#160;MG</p>
+<p style="position:absolute;top:1040px;left:140px;white-space:nowrap" class="ft02">Telefone&#160;(35)3539-5003&#160;–&#160;e-mail&#160;vigilancia.saude@ssparaiso.mg.gov.br</p>
+ </section>
+</div>
+</body>
+</html>
