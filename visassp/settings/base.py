@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'terrenos',
     'crispy_forms',
     'bootstrapform',
+    'numero_por_extenso',
+
 
 ]
 
