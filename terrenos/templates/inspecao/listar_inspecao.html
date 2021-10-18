@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}
+Listagem de Inspeções
+{% endblock title %}
+
+{% block content %}
+<form method="get">
+    <div class="col-lg-15">
+    <div class="input-group">
+      <input type="text" class="form-control" name="busca" placeholder="Buscar inspeção">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Pesquisar</button>
+      </span>
+    </div>
+    </div>
+</form>
+
+<table class="table table-striped table-hover table-dark table-condensed">
+  <thead>
+
+    <tr>
+      <th class="text-center">Protocolo</th>
+      <th class="text-center">Terreno</th>
+      <th class="text-center">Data inspeção</th>
+      <th class="text-center">Fiscal</th>
+      <th class="text-center">Relatório</th>
+      <th class="text-center">Editar</th>
+      <th class="text-center">Excluir</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for inspecao in lista %}
+    <!-- Criei um "for" para rodar com os dados que veio do sistema e apresentar em cada linha um novo registro -->
+    <tr>
+        <td class="text-center">{{ inspecao.notificacao.id }}</td>
+        <td class="text-center">{{ inspecao.notificacao.terreno.inscricao_terreno }}</td>
+        <td class="text-center">{{ inspecao.data_inspecao|date:"d/m/Y" }}</td>
+        <td class="text-center">{{ inspecao.notificacao.fiscal }}</td>
+
+        <td class="text-center">
+        <a href="{% url 'gerar_inspecao' pk=inspecao.pk %}">
+          <span class="glyphicon glyphicon-file"></span>
+        </a>
+        </td>
+
+        <td class="text-center">
+        <a href="{% url 'editar_inspecao' pk=inspecao.pk %}">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+        </td>
+        <td class="text-center">
+        <a href="{% url 'excluir_inspecao' pk=inspecao.pk %}">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
+        </td>
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+<a href="{% url 'cadastrar_inspecao' %}">
+<button type="submit" class="btn btn-primary">
+    Cadastrar
+</button>
+</a>
+{% endblock content %}

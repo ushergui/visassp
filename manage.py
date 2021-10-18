@@ -3,6 +3,8 @@
 import os
 import sys
 
+#Arquivo que a gente usa para dar coamandos no framework Django
+
 
 def main():
     """Run administrative tasks."""

@@ -33,6 +33,7 @@ Listagem de Notificações
       <th class="text-center">Notificação</th>
       <th class="text-center">AR Cor.</th>
       <th class="text-center">AR Prop.</th>
+      <th class="text-center">AR Multi</th>
       <th class="text-center">Editar</th>
       <th class="text-center">Excluir</th>
     </tr>
@@ -67,6 +68,12 @@ Listagem de Notificações
 
         <td class="text-center">
         <a href="{% url 'gerar_ar2' pk=notificacao.pk %}">
+          <span class="glyphicon glyphicon-envelope"></span>
+        </a>
+        </td>
+
+        <td class="text-center">
+        <a href="{% url 'gerar_ar3' pk=notificacao.pk %}">
           <span class="glyphicon glyphicon-envelope"></span>
         </a>
         </td>

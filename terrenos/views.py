@@ -1,7 +1,10 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, ImageField
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from datetime import date, timedelta
+from django.forms.widgets import ClearableFileInput
+
+
+
 
 
 class formulario_proprietario(ModelForm):
@@ -190,6 +193,63 @@ def editar_protocolo(request, pk, template_name='protocolo/formulario_protocolo.
     return render(request, template_name, {'form': form})
 
 
+class formulario_inspecao(ModelForm):
+    class Meta:
+        model = Inspecao
+        fields = ['notificacao', 'data_inspecao', 'horario_inspecao', 'foto_inspecao_1', 'data_relatorio']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['data_inspecao'].widget.attrs.update({'class': 'mask-date'})
+        self.fields['data_relatorio'].widget.attrs.update({'class': 'mask-date'})
+        self.fields['horario_inspecao'].widget.attrs.update({'class': 'mask-time'})
+
+def cadastrar_inspecao(request, template_name='inspecao/formulario_inspecao.html'):
+    if request.method == 'POST':
+        form = formulario_inspecao(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_inspecao')
+    else:
+        form = formulario_inspecao()
+    return render(request, template_name, {'form': form})
+
+
+
+def listar_inspecao(request, template_name="inspecao/listar_inspecao.html"):
+    query = request.GET.get("busca")
+    if query:
+        inspecao = Inspecao.objects.filter(id__icontains=query)
+    else:
+        inspecao = Inspecao.objects.all()
+
+    inspecoes = {'lista': inspecao}
+    return render(request, template_name, inspecoes)
+
+def gerar_inspecao(request,pk,template_name="inspecao/gerar_inspecao.html"):
+    inspecao = get_object_or_404(Inspecao, pk=pk)
+    return render(request, template_name, {'inspecao':inspecao})
+
+# Cria a função de deletar um estado
+def excluir_inspecao(request, pk):
+    inspecao = Inspecao.objects.get(pk=pk)
+    if request.method == "POST":
+        inspecao.delete()
+        return redirect('listar_inspecao')
+    return render(request, 'inspecao/excluir_inspecao.html', {'inspecao': inspecao})
+
+
+# Cria a função de editar um estado
+def editar_inspecao(request, pk, template_name='inspecao/formulario_inspecao.html'):
+    inspecao = get_object_or_404(Inspecao, pk=pk)
+    if request.method == "POST":
+        form = formulario_inspecao(request.POST, request.FILES, instance=inspecao)
+        if form.is_valid():
+            inspecao = form.save()
+            return redirect('listar_inspecao')
+    else:
+        form = formulario_inspecao(instance=inspecao)
+    return render(request, template_name, {'form': form})
 
 class formulario_notificacao(ModelForm):
     class Meta:
@@ -205,6 +265,10 @@ class formulario_notificacao(ModelForm):
         self.fields['data_inspecao'].widget.attrs.update({'class': 'mask-date'})
         self.fields['data_notificacao'].widget.attrs.update({'class': 'mask-date'})
         self.fields['horario_inspecao'].widget.attrs.update({'class': 'mask-time'})
+
+def ver_protocolo(request,pk,template_name="protocolo/ver_protocolo.html"):
+    protocolo= get_object_or_404(Protocolo, pk=pk)
+    return render(request, template_name, {'protocolo':protocolo})
 
 # Cria a função de cadastrar um estado
 def cadastrar_notificacao(request, template_name='notificacao/formulario_notificacao.html'):
@@ -242,6 +306,10 @@ def gerar_ar(request,pk,template_name="notificacao/gerar_ar.html"):
     return render(request, template_name, {'notificacao':notificacao})
 
 def gerar_ar2(request,pk,template_name="notificacao/gerar_ar2.html"):
+    notificacao = get_object_or_404(Notificacao, pk=pk)
+    return render(request, template_name, {'notificacao':notificacao})
+
+def gerar_ar3(request,pk,template_name="notificacao/gerar_ar3.html"):
     notificacao = get_object_or_404(Notificacao, pk=pk)
     return render(request, template_name, {'notificacao':notificacao})
 
@@ -319,7 +387,11 @@ def gerar_ar_inf(request,pk,template_name="infracao/gerar_ar_inf.html"):
     infracao = get_object_or_404(Infracao, pk=pk)
     return render(request, template_name, {'infracao':infracao})
 
-def gerar_ar2_inf(request,pk,template_name="infracao/gerar_ar2_inf.html"):
+def gerar_ar_inf2(request,pk,template_name="notificacao/gerar_ar_inf2.html"):
+    infracao = get_object_or_404(Infracao, pk=pk)
+    return render(request, template_name, {'infracao':infracao})
+
+def gerar_ar_inf3(request,pk,template_name="notificacao/gerar_ar_inf3.html"):
     infracao = get_object_or_404(Infracao, pk=pk)
     return render(request, template_name, {'infracao':infracao})
 

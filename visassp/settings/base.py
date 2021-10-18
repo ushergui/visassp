@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Encontrando o diretório base
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
@@ -21,16 +22,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+#Código de segurança
 SECRET_KEY = 'django-insecure-rqq5zbgg-jw%bw0^e(u%g$3g5*a097y)z9_c(xapc7y$*daxm^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Enquanto estivermos em ambiente de desenvolvimento este tem que estar True
 DEBUG = True
 
+# Domínio que a aplicação será executada
 ALLOWED_HOSTS = ['127.0.0.1', 'serene-brushlands-59504.herokuapp.com']
 
 
 # Application definition
 
+# Aplicações instaladas
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,10 +47,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrapform',
     'numero_por_extenso',
-
-
 ]
 
+# Fica no meio para processar os conteúdos
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -57,8 +61,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Rotas
 ROOT_URLCONF = 'visassp.urls'
 
+# Tudo que a gente vai mostrar para o usuário
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -75,12 +81,14 @@ TEMPLATES = [
     },
 ]
 
+# Padrão de criação de aplicações do django
 WSGI_APPLICATION = 'visassp.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# Configurações do banco de dados
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -93,6 +101,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
+# Validações de senhas de autenticação
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -112,6 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
+# Língua padrão
 LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
@@ -130,7 +140,11 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = '/media/'
-MEDIA_ROOT = "{}/media".format(BASE_DIR)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'terrenos/media')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+    )
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

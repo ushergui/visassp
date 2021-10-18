@@ -1,7 +1,6 @@
-import datetime
+
 from datetime import *
 
-import numero_por_extenso
 from django.db import models
 
 # Create your models here.
@@ -1207,7 +1206,7 @@ class Protocolo(models.Model):
     )
     status_protocolo = models.CharField(max_length=15, null=False, choices=STATUS_CHOICES)
     entrada_protocolo = models.DateField(null=False)
-    encerramento_protocolo = models.DateField(null=True)
+    encerramento_protocolo = models.DateField(null=True, blank=True)
     fiscal = models.ForeignKey('Fiscal', on_delete=models.CASCADE, null=False)
 
     def __str__(self):
@@ -1260,6 +1259,12 @@ class Notificacao(models.Model):
         vrm2 = self.terreno.area_terreno * 1.9982
         return (round(vrm2, 2))
 
+class Inspecao(models.Model):
+    notificacao = models.ForeignKey('Notificacao', on_delete=models.CASCADE, null=False)
+    data_inspecao = models.DateField(null=False)
+    horario_inspecao = models.TimeField(null=False)
+    foto_inspecao_1 = models.ImageField(null= True, blank=True)
+    data_relatorio = models.DateField(blank=False)
 
 class Infracao(models.Model):
     notificacao = models.OneToOneField(Notificacao, on_delete=models.CASCADE)

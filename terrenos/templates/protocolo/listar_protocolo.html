@@ -36,7 +36,9 @@ Listagem de Protocolos
     {% for protocolo in lista %}
     <!-- Criei um "for" para rodar com os dados que veio do sistema e apresentar em cada linha um novo registro -->
     <tr>
-        <td>{{ protocolo.protocolo }}</td>
+        <td><a href="{% url 'ver_protocolo' pk=protocolo.pk %}">
+          {{ protocolo.protocolo }}
+        </a></td>
         <td>{{ protocolo.solicitante_protocolo }}</td>
         <td>{{ protocolo.logradouro_protocolo }}</td>
         <td>{{ protocolo.descricao_protocolo }}</td>
